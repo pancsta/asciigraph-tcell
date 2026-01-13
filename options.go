@@ -2,6 +2,8 @@ package asciigraph
 
 import (
 	"strings"
+
+	"github.com/gdamore/tcell/v2"
 )
 
 // Option represents a configuration setting.
@@ -16,11 +18,12 @@ type config struct {
 	Offset                 int
 	Caption                string
 	Precision              uint
-	CaptionColor           AnsiColor
-	AxisColor              AnsiColor
-	LabelColor             AnsiColor
-	SeriesColors           []AnsiColor
-	SeriesLegends          []string
+	CaptionColor           tcell.Color
+	AxisColor              tcell.Color
+	LabelColor             tcell.Color
+	SeriesColors           []tcell.Color
+	SeriesLegends []string
+	HideAxisY     bool
 }
 
 // An optionFunc applies an option.
@@ -61,6 +64,12 @@ func Height(h int) Option {
 	})
 }
 
+func HideAxisY(b bool) Option {
+	return optionFunc(func(c *config) {
+		c.HideAxisY = b
+	})
+}
+
 // LowerBound sets the graph's minimum value for the vertical axis. It will be ignored
 // if the series contains a lower value.
 func LowerBound(min float64) Option {
@@ -91,28 +100,28 @@ func Caption(caption string) Option {
 }
 
 // CaptionColor sets the caption color.
-func CaptionColor(ac AnsiColor) Option {
+func CaptionColor(ac tcell.Color) Option {
 	return optionFunc(func(c *config) {
 		c.CaptionColor = ac
 	})
 }
 
 // AxisColor sets the axis color.
-func AxisColor(ac AnsiColor) Option {
+func AxisColor(ac tcell.Color) Option {
 	return optionFunc(func(c *config) {
 		c.AxisColor = ac
 	})
 }
 
 // LabelColor sets the axis label color.
-func LabelColor(ac AnsiColor) Option {
+func LabelColor(ac tcell.Color) Option {
 	return optionFunc(func(c *config) {
 		c.LabelColor = ac
 	})
 }
 
 // SeriesColors sets the series colors.
-func SeriesColors(ac ...AnsiColor) Option {
+func SeriesColors(ac ...tcell.Color) Option {
 	return optionFunc(func(c *config) {
 		c.SeriesColors = ac
 	})
