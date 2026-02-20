@@ -3,7 +3,7 @@ package asciigraph
 import (
 	"unicode/utf8"
 
-	"github.com/gdamore/tcell/v2"
+	"github.com/pancsta/tcell-v2"
 )
 
 // createLegendItem calculates the length of a legend item (box + space + text).

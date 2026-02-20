@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/gdamore/tcell/v2"
+	"github.com/pancsta/tcell-v2"
 )
 
 // PlotToScreen renders an ascii graph for a series directly to a tcell.Screen.

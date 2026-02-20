@@ -3,7 +3,7 @@ package asciigraph
 import (
 	"strings"
 
-	"github.com/gdamore/tcell/v2"
+	"github.com/pancsta/tcell-v2"
 )
 
 // Option represents a configuration setting.
@@ -22,8 +22,8 @@ type config struct {
 	AxisColor              tcell.Color
 	LabelColor             tcell.Color
 	SeriesColors           []tcell.Color
-	SeriesLegends []string
-	HideAxisY     bool
+	SeriesLegends          []string
+	HideAxisY              bool
 }
 
 // An optionFunc applies an option.
