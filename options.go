@@ -24,6 +24,7 @@ type config struct {
 	SeriesColors           []tcell.Color
 	SeriesLegends          []string
 	HideAxisY              bool
+	HideAxisX              bool
 }
 
 // An optionFunc applies an option.
@@ -67,6 +68,12 @@ func Height(h int) Option {
 func HideAxisY(b bool) Option {
 	return optionFunc(func(c *config) {
 		c.HideAxisY = b
+	})
+}
+
+func HideAxisX(b bool) Option {
+	return optionFunc(func(c *config) {
+		c.HideAxisX = b
 	})
 }
 

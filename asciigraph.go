@@ -28,6 +28,9 @@ func PlotManyToScreen(screen tcell.Screen, x, y int, data [][]float64, options .
 			config.Width += 3
 		}
 	}
+	if config.HideAxisX {
+		config.Height++
+	}
 
 	// Create a deep copy of the input data
 	dataCopy := make([][]float64, len(data))
@@ -175,6 +178,10 @@ func PlotManyToScreen(screen tcell.Screen, x, y int, data [][]float64, options .
 			d0 := series[xAxis]
 			d1 := series[xAxis+1]
 
+			// if d1 == 0 && d0 == 0 {
+			// 	continue
+			// }
+
 			if math.IsNaN(d0) && math.IsNaN(d1) {
 				continue
 			}
@@ -223,7 +230,11 @@ func PlotManyToScreen(screen tcell.Screen, x, y int, data [][]float64, options .
 	}
 
 	// Render to screen
-	for row := 0; row < rows+1; row++ {
+	rowsNum := rows + 1
+	if config.HideAxisX {
+		rowsNum--
+	}
+	for row := 0; row < rowsNum; row++ {
 		// Find last non-space character in this row
 		lastCharIndex := 0
 		for i := width - 1; i >= 0; i-- {
